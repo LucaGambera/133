@@ -7,12 +7,10 @@ package rest;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.Produces;
-import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
-import javax.ws.rs.PUT;
 import javax.ws.rs.client.Client;
-import javax.ws.rs.core.MediaType;
+import javax.ws.rs.client.WebTarget;
 
 /**
  * REST Web Service
@@ -24,17 +22,17 @@ public class Message {
 
     private static final String API_KEY = "api_key=eb482103d8c607c29a702217d8ad491a";
     private static final String BASE_URL = "https://api.themoviedb.org/3";
-    private static final String API_URL = BASE_URL + "/discover/movie?sort_by=popularity.desc&"+ API_KEY +"&language=fr-FR";
+    private static final String API_URL = BASE_URL + "/discover/movie?sort_by=popularity.desc&" + API_KEY + "&language=fr-FR&page=1";
 
     /**
-     * const API_KEY = 'api_key=eb482103d8c607c29a702217d8ad491a';
-     * const BASE_URL = 'https://api.themoviedb.org/3';
-     * const API_URL = BASE_URL + '/discover/movie?sort_by=popularity.desc&' + API_KEY + '&language=fr-FR';
-     
+     * const API_KEY = 'api_key=eb482103d8c607c29a702217d8ad491a'; const
+     * BASE_URL = 'https://api.themoviedb.org/3'; const API_URL = BASE_URL +
+     * '/discover/movie?sort_by=popularity.desc&' + API_KEY + '&language=fr-FR';
+     *
      */
     @Context
     private UriInfo context;
-
+    private WebTarget webTarget;
     private Client client;
 
     /**
@@ -42,7 +40,8 @@ public class Message {
      * Creates a new instance of Message
      */
     public Message() {
-
+        client = javax.ws.rs.client.ClientBuilder.newClient();
+        webTarget = client.target(API_URL);
     }
 
     /**
@@ -50,31 +49,23 @@ public class Message {
      *
      * @return an instance of java.lang.String
      */
-    @GET
-    @Produces(MediaType.APPLICATION_XML)
-    public String getXml() {
-        //TODO return proper representation object
-        throw new UnsupportedOperationException();
-    }
-
     /**
-     * PUT method for updating or creating an instance of Message
-     *
-     * @param content representation for the resource
+     * Creates a new instance of Message
      */
-    @PUT
-    @Consumes(MediaType.APPLICATION_XML)
-    public void putXml(String content) {
-    }
-
+    /**
+     * Retrieves representation of an instance of rest.Message
+     *
+     * @return an instance of java.lang.String
+     */
     @GET
-    @Path("getFilm")
-    @Produces(javax.ws.rs.core.MediaType.TEXT_PLAIN)
-    @Consumes(javax.ws.rs.core.MediaType.APPLICATION_FORM_URLENCODED)
-    public String getMessage() {
+    @Path("getFilms")
+    @Produces(javax.ws.rs.core.MediaType.APPLICATION_JSON)
+    public String getFilms() {
         String retourApi = "Test";
-
+        WebTarget ressource = webTarget;
+        retourApi = ressource.request(javax.ws.rs.core.MediaType.APPLICATION_JSON).header("Accept-Charset", "UTF-8").get(String.class);
         return retourApi;
     }
+
 
 }
