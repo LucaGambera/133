@@ -11,6 +11,7 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PUT;
+import javax.ws.rs.client.Client;
 import javax.ws.rs.core.MediaType;
 
 /**
@@ -21,13 +22,27 @@ import javax.ws.rs.core.MediaType;
 @Path("Service2")
 public class Message {
 
+    private static final String API_KEY = "api_key=eb482103d8c607c29a702217d8ad491a";
+    private static final String BASE_URL = "https://api.themoviedb.org/3";
+    private static final String API_URL = BASE_URL + "/discover/movie?sort_by=popularity.desc&"+ API_KEY +"&language=fr-FR";
+
+    /**
+     * const API_KEY = 'api_key=eb482103d8c607c29a702217d8ad491a';
+     * const BASE_URL = 'https://api.themoviedb.org/3';
+     * const API_URL = BASE_URL + '/discover/movie?sort_by=popularity.desc&' + API_KEY + '&language=fr-FR';
+     
+     */
     @Context
     private UriInfo context;
 
+    private Client client;
+
     /**
+     *
      * Creates a new instance of Message
      */
     public Message() {
+
     }
 
     /**
@@ -56,9 +71,9 @@ public class Message {
     @Path("getFilm")
     @Produces(javax.ws.rs.core.MediaType.TEXT_PLAIN)
     @Consumes(javax.ws.rs.core.MediaType.APPLICATION_FORM_URLENCODED)
-    public String getMessage(){
+    public String getMessage() {
         String retourApi = "Test";
-        
+
         return retourApi;
     }
 
