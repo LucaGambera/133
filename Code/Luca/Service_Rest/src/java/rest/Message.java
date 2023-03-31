@@ -22,7 +22,7 @@ public class Message {
 
     private static final String API_KEY = "api_key=eb482103d8c607c29a702217d8ad491a";
     private static final String BASE_URL = "https://api.themoviedb.org/3";
-    private static final String API_URL = BASE_URL + "/movie/top_rated?" + API_KEY + "&language=fr-FR&page=1";
+    private static final String API_URL = BASE_URL + "/discover/movie?sort_by=popularity.desc&" + API_KEY + "&language=fr-FR&page=1";
 
     /**
      * const API_KEY = 'api_key=eb482103d8c607c29a702217d8ad491a'; const
@@ -66,5 +66,6 @@ public class Message {
         retourApi = ressource.request(javax.ws.rs.core.MediaType.APPLICATION_JSON).header("Accept-Charset", "UTF-8").get(String.class);
         return retourApi;
     }
+
 
 }
