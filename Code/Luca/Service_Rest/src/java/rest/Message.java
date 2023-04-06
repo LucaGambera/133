@@ -11,7 +11,6 @@ import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.client.Client;
-import com.google.gson.Gson;
 import javax.ws.rs.client.WebTarget;
 
 /**
