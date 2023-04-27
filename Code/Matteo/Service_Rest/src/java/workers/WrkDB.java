@@ -176,10 +176,33 @@ public class WrkDB {
         System.out.println(lstAvis);
         return lstAvis;
     }
-    
-//    public boolean addAvis(String avis, int idfilm, int fkuser){
-//        
-//    }
+
+    public boolean addAvis(String avis, int idfilm, int fkuser) {
+        boolean succes = false;
+        boolean result = openConnexion();
+        if (result) {
+            PreparedStatement ps = null;
+            try {
+                ps = dbConnexion.prepareStatement("INSERT INTO t_avis(Avis, IdFilm, FK_Users) VALUES(?,?,?)");
+                ps.setString(1, avis);
+                ps.setInt(2, idfilm);
+                ps.setInt(3, fkuser);
+                int rowsAffected = ps.executeUpdate();
+                if (rowsAffected > 0) {
+                    succes = true;
+                    System.out.println("New entry added to t_user table.");
+                } else {
+                    System.out.println("No rows affected when adding new entry to t_user table.");
+                }
+            } catch (Exception ex) {
+                System.out.println("Error executing insert statement: " + ex.getMessage());
+            }
+            if (succes) {
+                result = closeConnexion();
+            }
+        }
+        return succes;
+    }
 
     public boolean adduser(String username, String password) {
         boolean succes = false;
@@ -206,4 +229,60 @@ public class WrkDB {
         }
         return succes;
     }
+
+    public ArrayList<String> checkLogin(String username) {
+        ArrayList<String> lstUsers = null;
+        boolean result = openConnexion();
+        if (result) {
+            System.out.println("connection ok");
+            PreparedStatement ps = null;
+            String pk_users = "";
+            String password = "";
+            lstUsers = new ArrayList<String>();
+            try {
+                ps = dbConnexion.prepareStatement("SELECT * FROM t_users WHERE user like (?) ");
+                ps.setString(1, username);
+                ResultSet rs = ps.executeQuery();
+                while (rs.next()) {
+                    pk_users = (String) rs.getString("PK_Users");
+                    username = (String) rs.getString("Username");
+                    password = (String) rs.getString("Password");
+                    lstUsers.add(pk_users + ", " + username + ", " + password);
+                }
+                rs.close();
+                result = true;
+            } catch (Exception ex) {
+                System.out.println(ex.getMessage());
+            }
+            if (result) {
+                result = closeConnexion();
+            }
+        }
+        return lstUsers;
+    }
+
+    public boolean deletAvis(int pk) {
+        boolean succes = false;
+        boolean result = openConnexion();
+        if (result) {
+            PreparedStatement ps = null;
+            try {
+                ps = dbConnexion.prepareStatement("DELETE FROM t_avis WHERE PK_Avis= " + pk);
+                int rowsAffected = ps.executeUpdate();
+                if (rowsAffected > 0) {
+                    succes = true;
+                    System.out.println("New entry deleted to t_avis table.");
+                } else {
+                    System.out.println("No rows affected when deleting new entry to t_avis table.");
+                }
+            } catch (Exception ex) {
+                System.out.println("Error executing insert statement: " + ex.getMessage());
+            }
+            if (succes) {
+                result = closeConnexion();
+            }
+        }
+        return succes;
+    }
+
 }

@@ -9,11 +9,11 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.Produces;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
-import javax.ws.rs.PUT;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import workers.WrkDB;
@@ -42,10 +42,12 @@ public class Message {
      *
      * @return an instance of java.lang.String
      */
+    
+    //nok
     @GET
     @Path("getTousAvis")
-    @Produces(MediaType.APPLICATION_JSON) 
-   public String getAvis() {
+    @Produces(MediaType.APPLICATION_JSON)
+    public String getAvis() {
         Gson gson = new Gson();
         String json;
         try {
@@ -55,7 +57,8 @@ public class Message {
         }
         return json;
     }
-
+    
+    //nok
     @GET
     @Path("getAvis")
     @Produces(MediaType.APPLICATION_JSON)
@@ -69,7 +72,8 @@ public class Message {
         }
         return json;
     }
-
+    
+    //nok
     @GET
     @Path("getUser")
     @Produces(MediaType.APPLICATION_JSON)
@@ -83,7 +87,8 @@ public class Message {
         }
         return json;
     }
-
+    
+    //ok
     @POST
     @Path("Adduser")
     @Produces(MediaType.TEXT_PLAIN)
@@ -91,6 +96,46 @@ public class Message {
     public String addUsers(@FormParam("username") String user, @FormParam("password") String password) {
         String s;
         if (wrkdb.adduser(user, password)) {
+            s = "OK";
+        } else {
+            s = "KO";
+        }
+        return s;
+    }
+    
+    //ok
+    @POST
+    @Path("Addavis")
+    @Produces(MediaType.TEXT_PLAIN)
+    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+    public String addAvis(@FormParam("avis") String avis, @FormParam("idfilm") int idfilm, @FormParam("fkuser") int fkuser) {
+        String s;
+        if (wrkdb.addAvis(avis, idfilm, fkuser)) {
+            s = "OK";
+        } else {
+            s = "KO";
+        }
+        return s;
+    }
+    
+    //nok
+    @POST
+    @Path("CheckLogin")
+    @Produces(MediaType.APPLICATION_JSON)
+    public String checkLogin(@FormParam("username") String username) {
+        Gson builder = new Gson();
+        String toJson = builder.toJson(wrkdb.checkLogin(username));
+        return "{\"user\":" + toJson + "}";
+    }
+
+    //ok
+    @DELETE
+    @Path("DeleteAvis")
+    @Produces(MediaType.TEXT_PLAIN)
+    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+    public String deleteMembre(@FormParam("PK_Avis") int PK) {
+        String s;
+        if (wrkdb.deletAvis(PK)) {
             s = "OK";
         } else {
             s = "KO";
