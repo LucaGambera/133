@@ -65,7 +65,7 @@ public class Message {
     @Path("getFilms")
     @Produces(javax.ws.rs.core.MediaType.APPLICATION_JSON)
     public String getFilms(@QueryParam("PAGE") String page) {
-        String retourApi = "Test";
+        String retourApi = " ";
         films = client.target(API_URL + page);
         WebTarget ressource = films;
         retourApi = ressource.request(javax.ws.rs.core.MediaType.APPLICATION_JSON).header("Accept-Charset", "UTF-8").get(String.class);
@@ -76,8 +76,8 @@ public class Message {
     @Path("getFilm")
     @Produces(javax.ws.rs.core.MediaType.APPLICATION_JSON)
     public String getFilm(@QueryParam("ID") String id) {
-        String retourApi = "Test";
-        film = client.target(API_CHERCHER_FILM + id + "?"+ API_KEY_LANGUE);
+        String retourApi = " ";
+        film = client.target(API_CHERCHER_FILM + id + "?" + API_KEY_LANGUE);
         WebTarget ressource = film;
         retourApi = ressource.request(javax.ws.rs.core.MediaType.APPLICATION_JSON).header("Accept-Charset", "UTF-8").get(String.class);
         return retourApi;
