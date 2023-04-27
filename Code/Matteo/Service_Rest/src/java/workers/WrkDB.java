@@ -142,4 +142,38 @@ public class WrkDB {
         }
         return lstUser;
     }
+
+    public ArrayList<String> getUnAvis(int idFilm) {
+        ArrayList<String> lstAvis = null;
+        boolean result = openConnexion();
+        if (result) {
+            System.out.println("connection ok");
+            PreparedStatement ps = null;
+            String avis = "";
+            lstAvis = new ArrayList<String>();
+            try {
+
+                ps = dbConnexion.prepareStatement("SELECT * FROM t_avis where IdFilm=" + idFilm);
+                ResultSet rs = ps.executeQuery();
+                while (rs.next()) {
+                    avis = (String) rs.getString(1);
+                    avis += "," + (String) rs.getString(2);
+                    avis += "," + (String) rs.getString(3);
+                    avis += "," + (String) rs.getString(4);
+                    lstAvis.add(avis);
+                }
+                rs.close();
+                result = true;
+                System.out.println("OK");
+            } catch (Exception ex) {
+                System.out.println(ex.getMessage());
+            }
+
+            if (result) {
+                result = closeConnexion();
+            }
+        }
+        System.out.println(lstAvis);
+        return lstAvis;
+    }
 }

@@ -41,13 +41,27 @@ public class Message {
      * @return an instance of java.lang.String
      */
     @GET
-    @Path("getAvis")
+    @Path("getTousAvis")
     @Produces(MediaType.APPLICATION_JSON)
     public String getAvis() {
         Gson gson = new Gson();
         String json;
         try {
             json = gson.toJson(wrkdb.getAvis());
+        } catch (Exception e) {
+            json = gson.toJson("error");
+        }
+        return json;
+    }
+
+    @GET
+    @Path("getAvis")
+    @Produces(MediaType.APPLICATION_JSON)
+    public String getUnAvis(@QueryParam("IDFILM") int id) {
+        Gson gson = new Gson();
+        String json;
+        try {
+            json = gson.toJson(wrkdb.getUnAvis(id));
         } catch (Exception e) {
             json = gson.toJson("error");
         }
