@@ -4,6 +4,7 @@
  */
 package workers;
 
+import com.mysql.cj.jdbc.JdbcConnection;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -35,9 +36,9 @@ public class WrkDB {
 
     public boolean openConnexion() {
 
-        final String url = "jdbc:mysql://localhost:" + port + "/" + dbName + "?serverTimezone=CET";
-        final String user = "root";
-        final String pw = "emf123";
+        final String url = "jdbc:mysql://5.182.248.183:" + port + "/" + dbName + "?serverTimezone=CET";
+        final String user = "gamberal01_luca";
+        final String pw = "--I+9IhP8?wh";
         boolean result = false;
 
         try {
@@ -152,7 +153,6 @@ public class WrkDB {
             String avis = "";
             lstAvis = new ArrayList<String>();
             try {
-
                 ps = dbConnexion.prepareStatement("SELECT * FROM t_avis where IdFilm=" + idFilm);
                 ResultSet rs = ps.executeQuery();
                 while (rs.next()) {
@@ -175,5 +175,35 @@ public class WrkDB {
         }
         System.out.println(lstAvis);
         return lstAvis;
+    }
+    
+//    public boolean addAvis(String avis, int idfilm, int fkuser){
+//        
+//    }
+
+    public boolean adduser(String username, String password) {
+        boolean succes = false;
+        boolean result = openConnexion();
+        if (result) {
+            PreparedStatement ps = null;
+            try {
+                ps = dbConnexion.prepareStatement("INSERT INTO t_users(username, password) VALUES(?,?)");
+                ps.setString(1, username);
+                ps.setString(2, password);
+                int rowsAffected = ps.executeUpdate();
+                if (rowsAffected > 0) {
+                    succes = true;
+                    System.out.println("New entry added to t_user table.");
+                } else {
+                    System.out.println("No rows affected when adding new entry to t_user table.");
+                }
+            } catch (Exception ex) {
+                System.out.println("Error executing insert statement: " + ex.getMessage());
+            }
+            if (succes) {
+                result = closeConnexion();
+            }
+        }
+        return succes;
     }
 }
