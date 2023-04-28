@@ -85,9 +85,11 @@ class Ctrl_film {
     }
 
 
-detail(){
+detail(id){
+
 wrk_index.chargerVue("avis", function (){
-    ctrl_avis.start();
+
+    ctrl_avis.start(id);
 });
 console.log("charger")
     }
@@ -105,11 +107,12 @@ console.log("charger")
                 title,
                 poster_path,
                 vote_average,
+                id
             } = movie;
             const movieEl = document.createElement('div');
             movieEl.classList.add('movie');
             movieEl.innerHTML = `
- <div onclick="ctrl_film.detail()" id="view">
+ <div onclick="ctrl_film.detail(${id})" id="view">
              <img src="${poster_path? IMG_URL+poster_path: "http://via.placeholder.com/1080x1580" }" alt="${title}">
              </div>
             <div class="movie-info">

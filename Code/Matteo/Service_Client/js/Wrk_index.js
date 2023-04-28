@@ -11,7 +11,7 @@ class Wrk_index {
   /**affiche la vue demandée
    * 
    * @param {*} vue 
-   * @param {*} callback 
+   * @param {*} callback -
    */
   chargerVue(vue, callback) {
 

@@ -15,6 +15,7 @@ $().ready(function () {
     ctrl_index = new Ctrl_index();
     ctrl_index.loadFilm();
     ctrl_film = new Ctrl_film();
+    ctrl_avis = new Ctrl_avis();
 });
 
 class Ctrl_index {
