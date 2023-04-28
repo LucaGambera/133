@@ -5,7 +5,6 @@
 package workers;
 
 import beans.Users;
-import com.mysql.cj.jdbc.JdbcConnection;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -122,7 +121,7 @@ public class WrkDB {
             String user = "";
             lstUser = new ArrayList<String>();
             try {
-                ps = dbConnexion.prepareStatement("SELECT * FROM mydb.t_users where PK_Users = " + PK + ";");
+                ps = dbConnexion.prepareStatement("SELECT * FROM t_users where PK_Users = " + PK + ";");
                 ResultSet rs = ps.executeQuery();
                 while (rs.next()) {
                     user = (String) rs.getString(1);
@@ -211,9 +210,10 @@ public class WrkDB {
         if (result) {
             PreparedStatement ps = null;
             try {
-                ps = dbConnexion.prepareStatement("INSERT INTO t_users(username, password) VALUES(?,?)");
+                ps = dbConnexion.prepareStatement("INSERT INTO t_users(username, password, admin) VALUES(?,?,?)");
                 ps.setString(1, username);
                 ps.setString(2, password);
+                ps.setInt(3, 1);
                 int rowsAffected = ps.executeUpdate();
                 if (rowsAffected > 0) {
                     succes = true;
@@ -243,21 +243,28 @@ public class WrkDB {
             System.out.println("connection ok");
 
             PreparedStatement ps = null;
-            int pk_user = 0;
+            String pk_user = "";
             String username_user = "";
             String password_user = "";
             Short admin_user = 0;
             lstUsers = new ArrayList<Users>();
             try {
-                ps = dbConnexion.prepareStatement("SELECT * FROM t_users WHERE user like (?) ");
+                ps = dbConnexion.prepareStatement("SELECT * FROM t_users WHERE Username like (?) ");
                 ps.setString(1, username);
                 ResultSet rs = ps.executeQuery();
                 while (rs.next()) {
-                    pk_user = Integer.getInteger(rs.getString("PK_Users"));
+                    System.out.println("connard");
+                    pk_user = rs.getString("PK_Users");
+                    System.out.println("pk");
                     username_user = (String) rs.getString("Username");
                     password_user = (String) rs.getString("Password");
                     admin_user = Short.parseShort(rs.getString("admin"));
-                    lstUsers.add(new Users(pk_user, username_user, password_user, admin_user));
+                    int pk = Integer.parseInt(pk_user);
+                    Users user = new Users(pk, username_user, password_user, admin_user);
+                    lstUsers.add(user);
+                    System.out.println("------");
+                    System.out.println(user);
+                    System.out.println("------");
                 }
                 rs.close();
                 for (Users lstUser : lstUsers) {

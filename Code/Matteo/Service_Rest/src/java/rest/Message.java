@@ -6,7 +6,6 @@ package rest;
 
 import com.google.gson.Gson;
 import java.util.ArrayList;
-import java.util.List;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.Produces;
@@ -74,7 +73,7 @@ public class Message {
         return json;
     }
 
-    //OK
+    //ok
     @GET
     @Path("getUser")
     @Produces(MediaType.APPLICATION_JSON)
