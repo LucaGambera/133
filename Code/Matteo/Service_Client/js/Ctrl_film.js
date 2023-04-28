@@ -55,7 +55,7 @@ class Ctrl_film {
         this.next = document.getElementById('next')
         this.current = document.getElementById('current')
 
-        wrk_film.getMovies(API_URL);
+        wrk_film.getMovies("https://gamberal01.emf-informatique.ch/javaDouanier/GatewayServlet?action=getFilms&PAGE=1");
         var form = document.getElementById('form');
         var prev = document.getElementById('prev')
         var next = document.getElementById('next')
@@ -70,7 +70,7 @@ class Ctrl_film {
             if (searchTerm) {
                 wrk_film.getMovies(searchURL + '&query=' + searchTerm)
             } else {
-                wrk_film.getMovies(API_URL);
+                wrk_film.getMovies("https://gamberal01.emf-informatique.ch/javaDouanier/GatewayServlet?action=getFilms&PAGE=" + this.currentPage);
             }
 
         })
@@ -98,20 +98,9 @@ class Ctrl_film {
      * @param {*} page 
      */
     pageCall(page) {
-        let urlSplit = this.lastUrl.split('?');
-        let queryParams = urlSplit[1].split('&');
-        let key = queryParams[queryParams.length - 1].split('=');
-        if (key[0] != 'page') {
-            let url = this.lastUrl + '&page=' + page
-                .getMovies(url);
-        } else {
-            key[1] = page.toString();
-            let a = key.join('=');
-            queryParams[queryParams.length - 1] = a;
-            let b = queryParams.join('&');
-            let url = urlSplit[0] + '?' + b
-            this.getMovies(url);
-        }
+        let url = "https://gamberal01.emf-informatique.ch/javaDouanier/GatewayServlet?action=getFilms&PAGE=" +page;
+        this.getMovies(url);
+
     }
 
 
