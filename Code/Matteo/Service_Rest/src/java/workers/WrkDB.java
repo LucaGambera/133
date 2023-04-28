@@ -213,7 +213,7 @@ public class WrkDB {
                 ps = dbConnexion.prepareStatement("INSERT INTO t_users(username, password, admin) VALUES(?,?,?)");
                 ps.setString(1, username);
                 ps.setString(2, password);
-                ps.setInt(3, 1);
+                ps.setInt(3, 0);
                 int rowsAffected = ps.executeUpdate();
                 if (rowsAffected > 0) {
                     succes = true;
@@ -237,7 +237,7 @@ public class WrkDB {
         boolean result = openConnexion();
         int pk_Retour = 0;
         short admin_retour = 0;
-        String resultat = "";
+        String resultat = "false";
         if (result) {
 
             System.out.println("connection ok");
@@ -253,7 +253,6 @@ public class WrkDB {
                 ps.setString(1, username);
                 ResultSet rs = ps.executeQuery();
                 while (rs.next()) {
-                    System.out.println("connard");
                     pk_user = rs.getString("PK_Users");
                     System.out.println("pk");
                     username_user = (String) rs.getString("Username");
@@ -262,9 +261,7 @@ public class WrkDB {
                     int pk = Integer.parseInt(pk_user);
                     Users user = new Users(pk, username_user, password_user, admin_user);
                     lstUsers.add(user);
-                    System.out.println("------");
-                    System.out.println(user);
-                    System.out.println("------");
+
                 }
                 rs.close();
                 for (Users lstUser : lstUsers) {
