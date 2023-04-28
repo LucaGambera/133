@@ -81,21 +81,16 @@ class Ctrl_film {
 
 
 
-        prev.addEventListener('click', () => {
-            if (this.prevPage > 0) {
-                this.pageCall(this.prevPage);
-            }
-        })
 
-        next.addEventListener('click', () => {
-            if (this.nextPage <= this.totalPages) {
-                this.pageCall(this.nextPage);
-            }
-        })
     }
 
 
-
+detail(){
+wrk_index.chargerVue("avis", function (){
+    ctrl_avis.start();
+});
+console.log("charger")
+    }
 
 
     /**affiche les films
@@ -114,7 +109,9 @@ class Ctrl_film {
             const movieEl = document.createElement('div');
             movieEl.classList.add('movie');
             movieEl.innerHTML = `
+ <div onclick="ctrl_film.detail()" id="view">
              <img src="${poster_path? IMG_URL+poster_path: "http://via.placeholder.com/1080x1580" }" alt="${title}">
+             </div>
             <div class="movie-info">
                 <h3>${title}</h3>
                 <span class="${this.getColor(vote_average)}">${vote_average}</span>
