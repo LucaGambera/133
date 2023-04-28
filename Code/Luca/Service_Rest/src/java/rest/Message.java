@@ -21,9 +21,9 @@ import javax.ws.rs.client.WebTarget;
 @Path("Service2")
 public class Message {
 
-    private static final String API_KEY_LANGUE = "api_key=eb482103d8c607c29a702217d8ad491a&language=fr-FR";
-
-    private static final String API_URL = "https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&" + API_KEY_LANGUE + "&page=";
+    private static final String API_KEY = "api_key=eb482103d8c607c29a702217d8ad491a";
+    private static final String LANGUE = "&language=fr-FR";
+    private static final String API_URL = "https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&" + API_KEY + "&page=";
     private static final String API_CHERCHER_FILM = "https://api.themoviedb.org/3/movie/";
 
     /**
@@ -66,7 +66,7 @@ public class Message {
     @Produces(javax.ws.rs.core.MediaType.APPLICATION_JSON)
     public String getFilms(@QueryParam("PAGE") String page) {
         String retourApi = " ";
-        films = client.target(API_URL + page);
+        films = client.target(API_URL + page + LANGUE);
         WebTarget ressource = films;
         retourApi = ressource.request(javax.ws.rs.core.MediaType.APPLICATION_JSON).header("Accept-Charset", "UTF-8").get(String.class);
         return retourApi;
@@ -77,7 +77,7 @@ public class Message {
     @Produces(javax.ws.rs.core.MediaType.APPLICATION_JSON)
     public String getFilm(@QueryParam("ID") String id) {
         String retourApi = " ";
-        film = client.target(API_CHERCHER_FILM + id + "?" + API_KEY_LANGUE);
+        film = client.target(API_CHERCHER_FILM + id + "?" + API_KEY + LANGUE);
         WebTarget ressource = film;
         retourApi = ressource.request(javax.ws.rs.core.MediaType.APPLICATION_JSON).header("Accept-Charset", "UTF-8").get(String.class);
         return retourApi;

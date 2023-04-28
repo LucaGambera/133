@@ -4,10 +4,73 @@
  */
 package wrk;
 
+import help.ParameterStringBuilder;
+import java.io.BufferedReader;
+import java.io.DataOutputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.HashMap;
+
 /**
  *
  * @author gamberal01
  */
 public class Wrk {
-    
+
+    public Wrk() {
+
+    }
+
+    public String sendChangement(String url, String method, HashMap<String, String> data) {
+        String resultat = "false";
+        try {
+            HttpURLConnection conn = (HttpURLConnection) new URL(url).openConnection();
+            conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+            conn.setRequestMethod(method);
+            conn.setDoOutput(true);
+            DataOutputStream out = new DataOutputStream(conn.getOutputStream());
+            out.writeBytes(ParameterStringBuilder.getParamsString(data));
+            out.flush();
+            out.close();
+            BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
+            StringBuilder sb = new StringBuilder();
+            String line;
+            while ((line = br.readLine()) != null) {
+                sb.append(line + "\n");
+            }
+            br.close();
+            resultat = sb.toString();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return resultat;
+    }
+
+    private String sendLire(String url) {
+        try {
+            HttpURLConnection conn = (HttpURLConnection) new URL(url).openConnection();
+            conn.setRequestMethod("GET");
+            BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
+            String inputLine;
+            StringBuilder response = new StringBuilder();
+            while ((inputLine = in.readLine()) != null) {
+                response.append(inputLine);
+            }
+            in.close();
+            return response.toString();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return "";
+    }
+
+    public String getFilms(int page) {
+        return sendLire("https://gamberal01.emf-informatique.ch/javaService_Rest/webresources/Service2/getFilms?PAGE=" + page);
+    }
+
+    public String getAvis() {
+        return sendLire("https://leonettim.emf-informatique.ch/javaService_Rest//webresources/Service1/getTousAvis");
+    }
+
 }
