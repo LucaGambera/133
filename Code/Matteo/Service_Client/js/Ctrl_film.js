@@ -93,15 +93,7 @@ class Ctrl_film {
             }
         })
     }
-    /**affiche la page demandé
-     * 
-     * @param {*} page 
-     */
-    pageCall(page) {
-        let url = "https://gamberal01.emf-informatique.ch/javaDouanier/GatewayServlet?action=getFilms&PAGE=" +page;
-        this.getMovies(url);
 
-    }
 
 
 
