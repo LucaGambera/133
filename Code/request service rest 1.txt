@@ -1,0 +1,27 @@
+tous avis:
+	getTousAvis
+
+avis par rapport a un film
+	getAvis
+	@QueryParam("IDFILM") int id
+
+avoir tous les utilisateur
+	getUser
+	@QueryParam("PK") int pk
+
+ajouter utilisateur
+	Adduser
+	@FormParam("username") String user, @FormParam("password") String password
+	
+ajouter avis
+	Addavis
+	@FormParam("avis") String avis, @FormParam("idfilm") int idfilm, @FormParam("fkuser") int fkuser
+
+checker login
+	CheckLogin
+	@FormParam("USERNAME") String username, @FormParam("PASSWORD") String password
+
+delete avis:
+	DeleteAvis
+	FormParam("PK_Avis") int PK
+	
