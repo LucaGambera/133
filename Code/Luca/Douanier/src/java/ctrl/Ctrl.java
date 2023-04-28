@@ -24,6 +24,12 @@ public class Ctrl {
 
     public String getFilms(int page) {
         return refWrk.getFilms(page);
+
+    }
+
+ 
+    public String addAvis(String avis, int idFilm, int pkUser) {
+        return refWrk.addAvis(avis, idFilm, pkUser);
     }
 
 }

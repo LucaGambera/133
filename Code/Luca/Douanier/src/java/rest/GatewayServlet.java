@@ -67,7 +67,8 @@ public class GatewayServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("application/json");
-        
+        response.setHeader("Access-Control-Allow-Origin", "*");
+
         String action = request.getParameter("action");
         PrintWriter out = response.getWriter();
         String result = "{}";
@@ -94,8 +95,38 @@ public class GatewayServlet extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            //(String avis, int idFilm, int pkUser)
             throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        response.setContentType("application/json");
+        PrintWriter out = response.getWriter();
+        String username = request.getParameter("username");
+        String password = request.getParameter("password");
+        String result = "{\"result\": false}";
+        switch (request.getParameter("action")) {
 
+            case "addAvis":
+//                if (session.getAttribute("login") == null) {
+//                    response.sendError(401, "You are not logged in");
+//                    break;
+//                }
+                String avis = request.getParameter("AVIS");
+                System.out.println(avis);
+                int idFilm = 0;
+                
+                idFilm = Integer.parseInt(request.getParameter("IDFILM"));
+                System.out.println(idFilm);
+                int pkUser = 0;
+                pkUser = Integer.parseInt(request.getParameter("PKUSER"));
+                System.out.println(pkUser);
+                result = ctrl.addAvis(avis, idFilm, pkUser);
+                System.out.println(result);
+                break;
+
+            default:
+                break;
+        }
+        out.println(result);
     }
 
     /**

@@ -9,5 +9,26 @@ package beans;
  * @author gamberal01
  */
 public class Response {
-    
+
+    public Response() {
+    }
+
+    public boolean isResult() {
+        return result;
+    }
+
+    public void setCode(boolean result) {
+        this.result = result;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    private boolean result;
+    private String name;
 }

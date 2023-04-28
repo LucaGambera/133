@@ -9,5 +9,17 @@ package beans;
  * @author gamberal01
  */
 public class SimpleResponse {
-    
+
+    public SimpleResponse() {
+    }
+
+    public boolean isResult() {
+        return result;
+    }
+
+    public void setResult(boolean result) {
+        this.result = result;
+    }
+
+    private boolean result;
 }

@@ -26,7 +26,6 @@ public class ParameterStringBuilder {
         }
 
         String resultString = result.toString();
-        System.out.println(resultString);
         return resultString.length() > 0
                 ? resultString.substring(0, resultString.length() - 1)
                 : resultString;

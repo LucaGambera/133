@@ -4,6 +4,8 @@
  */
 package wrk;
 
+import beans.SimpleResponse;
+import com.google.gson.Gson;
 import help.ParameterStringBuilder;
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
@@ -22,8 +24,8 @@ public class Wrk {
 
     }
 
-    public String sendChangement(String url, String method, HashMap<String, String> data) {
-        String resultat = "false";
+    private String sendChangement(String url, String method, HashMap<String, String> data) {
+        String result = "false";
         try {
             HttpURLConnection conn = (HttpURLConnection) new URL(url).openConnection();
             conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
@@ -33,18 +35,18 @@ public class Wrk {
             out.writeBytes(ParameterStringBuilder.getParamsString(data));
             out.flush();
             out.close();
-            BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
+            BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
             StringBuilder sb = new StringBuilder();
             String line;
             while ((line = br.readLine()) != null) {
                 sb.append(line + "\n");
             }
             br.close();
-            resultat = sb.toString();
+            result = sb.toString();
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return resultat;
+        return result;
     }
 
     private String sendLire(String url) {
@@ -70,7 +72,22 @@ public class Wrk {
     }
 
     public String getAvis() {
-        return sendLire("https://leonettim.emf-informatique.ch/javaService_Rest//webresources/Service1/getTousAvis");
+        return sendLire("https://leonettim.emf-informatique.ch/javaService_Rest/webresources/Service1/getTousAvis");
+    }
+
+    public String addAvis(String avis, int idFilm, int pkUser) {
+        String idFIlmString = "" + idFilm;
+        String pkUserString = "" + pkUser;
+        String lien = sendChangement("https://leonettim.emf-informatique.ch/javaService_Rest/webresources/Service1/Addavis", "POST", new HashMap<String, String>() {
+            {
+                put("avis", avis);
+                put("idFilm", idFIlmString);
+                put("pkUser", pkUserString);
+            }
+        });
+        System.out.println(lien);
+
+        return lien;
     }
 
 }
