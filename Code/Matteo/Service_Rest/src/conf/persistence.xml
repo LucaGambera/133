@@ -4,6 +4,8 @@
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <class>rest.beans.Users</class>
     <class>rest.beans.Avis</class>
+    <class>beans.Users</class>
+    <class>beans.Avis</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://127.0.0.1:3306/mydb?zeroDateTimeBehavior=CONVERT_TO_NULL"/>

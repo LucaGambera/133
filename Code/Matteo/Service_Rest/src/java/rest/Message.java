@@ -5,6 +5,8 @@
 package rest;
 
 import com.google.gson.Gson;
+import java.util.ArrayList;
+import java.util.List;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.Produces;
@@ -120,11 +122,15 @@ public class Message {
     //nok
     @POST
     @Path("CheckLogin")
-    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
     public String checkLogin(@FormParam("USERNAME") String username, @FormParam("PASSWORD") String password) {
+        String retour;
         Gson builder = new Gson();
-        String toJson = builder.toJson(wrkdb.checkLogin(username, password));
+        String db = wrkdb.checkLogin(username, password);
+        ArrayList<String> resultat = new ArrayList<>();
+        String toJson = builder.toJson(db);
         return "{\"user\":" + toJson + "}";
+
     }
 
     //ok
@@ -133,13 +139,13 @@ public class Message {
     @Produces(MediaType.TEXT_PLAIN)
     @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
     public String deleteMembre(@FormParam("PK_Avis") int PK) {
-        String s;
+        String retour;
         if (wrkdb.deletAvis(PK)) {
-            s = "OK";
+            retour = "OK";
         } else {
-            s = "KO";
+            retour = "KO";
         }
-        return s;
+        return retour;
     }
 
 }

@@ -4,6 +4,7 @@
  */
 package workers;
 
+import beans.Users;
 import com.mysql.cj.jdbc.JdbcConnection;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -230,29 +231,42 @@ public class WrkDB {
         return succes;
     }
 
-    public ArrayList<String> checkLogin(String username, String password) {
-        ArrayList<String> lstUsers = null;
+    public String checkLogin(String username, String password) {
+        ArrayList<Users> lstUsers = null;
+
         boolean result = openConnexion();
+        int pk_Retour = 0;
+        short admin_retour = 0;
+        String resultat = "";
         if (result) {
+
             System.out.println("connection ok");
+
             PreparedStatement ps = null;
-            String pk_user= "";
+            int pk_user = 0;
             String username_user = "";
             String password_user = "";
-            lstUsers = new ArrayList<String>();
+            Short admin_user = 0;
+            lstUsers = new ArrayList<Users>();
             try {
                 ps = dbConnexion.prepareStatement("SELECT * FROM t_users WHERE user like (?) ");
                 ps.setString(1, username);
                 ResultSet rs = ps.executeQuery();
                 while (rs.next()) {
-                    pk_user = (String) rs.getString("PK_Users");
+                    pk_user = Integer.getInteger(rs.getString("PK_Users"));
                     username_user = (String) rs.getString("Username");
-                    password = (String) rs.getString("Password");
-                    lstUsers.add(pk_user + ", " + username + ", " + password);
+                    password_user = (String) rs.getString("Password");
+                    admin_user = Short.parseShort(rs.getString("admin"));
+                    lstUsers.add(new Users(pk_user, username_user, password_user, admin_user));
                 }
                 rs.close();
-                for (String lstUser : lstUsers) {
+                for (Users lstUser : lstUsers) {
+                    if (lstUser.getPassword().equals(password)) {
+                        admin_retour = lstUser.getAdmin();
+                        pk_Retour = lstUser.getPKUsers();
+                        resultat = pk_Retour + "," + admin_retour;
 
+                    }
                 }
                 result = true;
             } catch (Exception ex) {
@@ -262,7 +276,7 @@ public class WrkDB {
                 result = closeConnexion();
             }
         }
-        return lstUsers;
+        return resultat;
     }
 
     public boolean deletAvis(int pk) {
