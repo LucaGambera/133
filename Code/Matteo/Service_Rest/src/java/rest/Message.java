@@ -42,8 +42,7 @@ public class Message {
      *
      * @return an instance of java.lang.String
      */
-    
-    //nok
+    //ok
     @GET
     @Path("getTousAvis")
     @Produces(MediaType.APPLICATION_JSON)
@@ -57,7 +56,7 @@ public class Message {
         }
         return json;
     }
-    
+
     //nok
     @GET
     @Path("getAvis")
@@ -72,8 +71,8 @@ public class Message {
         }
         return json;
     }
-    
-    //nok
+
+    //OK
     @GET
     @Path("getUser")
     @Produces(MediaType.APPLICATION_JSON)
@@ -87,7 +86,7 @@ public class Message {
         }
         return json;
     }
-    
+
     //ok
     @POST
     @Path("Adduser")
@@ -102,7 +101,7 @@ public class Message {
         }
         return s;
     }
-    
+
     //ok
     @POST
     @Path("Addavis")
@@ -117,14 +116,14 @@ public class Message {
         }
         return s;
     }
-    
+
     //nok
     @POST
     @Path("CheckLogin")
     @Produces(MediaType.APPLICATION_JSON)
-    public String checkLogin(@FormParam("username") String username) {
+    public String checkLogin(@FormParam("USERNAME") String username, @FormParam("PASSWORD") String password) {
         Gson builder = new Gson();
-        String toJson = builder.toJson(wrkdb.checkLogin(username));
+        String toJson = builder.toJson(wrkdb.checkLogin(username, password));
         return "{\"user\":" + toJson + "}";
     }
 

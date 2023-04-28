@@ -230,26 +230,30 @@ public class WrkDB {
         return succes;
     }
 
-    public ArrayList<String> checkLogin(String username) {
+    public ArrayList<String> checkLogin(String username, String password) {
         ArrayList<String> lstUsers = null;
         boolean result = openConnexion();
         if (result) {
             System.out.println("connection ok");
             PreparedStatement ps = null;
-            String pk_users = "";
-            String password = "";
+            String pk_user= "";
+            String username_user = "";
+            String password_user = "";
             lstUsers = new ArrayList<String>();
             try {
                 ps = dbConnexion.prepareStatement("SELECT * FROM t_users WHERE user like (?) ");
                 ps.setString(1, username);
                 ResultSet rs = ps.executeQuery();
                 while (rs.next()) {
-                    pk_users = (String) rs.getString("PK_Users");
-                    username = (String) rs.getString("Username");
+                    pk_user = (String) rs.getString("PK_Users");
+                    username_user = (String) rs.getString("Username");
                     password = (String) rs.getString("Password");
-                    lstUsers.add(pk_users + ", " + username + ", " + password);
+                    lstUsers.add(pk_user + ", " + username + ", " + password);
                 }
                 rs.close();
+                for (String lstUser : lstUsers) {
+
+                }
                 result = true;
             } catch (Exception ex) {
                 System.out.println(ex.getMessage());
