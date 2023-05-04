@@ -113,7 +113,7 @@ public class GatewayServlet extends HttpServlet {
                 String avis = request.getParameter("AVIS");
                 System.out.println(avis);
                 int idFilm = 0;
-                
+
                 idFilm = Integer.parseInt(request.getParameter("IDFILM"));
                 System.out.println(idFilm);
                 int pkUser = 0;

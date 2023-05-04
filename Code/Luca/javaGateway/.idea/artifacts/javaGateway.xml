@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="javaGateway">
+    <output-path>$PROJECT_DIR$/out/artifacts/javaGateway</output-path>
+    <root id="archive" name="javaGateway.war">
+      <element id="artifact" artifact-name="javaGateway:war exploded" />
+    </root>
+  </artifact>
+</component>
