@@ -14,6 +14,8 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.HashMap;
 
+import static jdk.nashorn.internal.runtime.ScriptRuntime.DELETE;
+
 /**
  *
  * @author gamberal01
@@ -95,16 +97,32 @@ public class Wrk {
 
         return lien;
     }
-
-    public boolean login(String username, String password) {
-        String result = "";
-        String code = sendChangement("", "POST", new HashMap<String, String>() {
+    public String addUser(String username, String password) {
+        String lien = sendChangement("https://leonettim.emf-informatique.ch/javaService_Rest/webresources/Service1/Adduser", "POST", new HashMap<String, String>() {
             {
-                put("USERNAME", username);
-                put("PASSWORD", password);
+                put("username", username);
+                put("password", password);
+
             }
         });
-        Response res = new Gson().fromJson(code, Response.class);
-        return res.isResult();
+        System.out.println(lien);
+
+        return lien;
     }
+
+    public boolean login(String username, String password) {
+        return false;
+    }
+    public String delAvis(int pk_Avis){
+        String pkAvisString = "" + pk_Avis;
+        String lien = sendChangement("https://leonettim.emf-informatique.ch/javaService_Rest/webresources/Service1/DeleteAvis","DELETE", new HashMap<String, String>(){
+            {
+                put("PK_Avis", pkAvisString);
+            }
+        } );
+        System.out.println(lien);
+        return lien;
+
+    }
+
 }

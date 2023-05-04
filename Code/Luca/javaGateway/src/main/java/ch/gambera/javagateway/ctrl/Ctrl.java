@@ -37,5 +37,11 @@ public class Ctrl {
     public String addAvis(String avis, int idFilm, int pkUser) {
         return refWrk.addAvis(avis, idFilm, pkUser);
     }
+    public String addUser(String username, String password){
+        return refWrk.addUser(username, password);
+    }
+    public String delAvis(int pk_Avis){
+        return refWrk.delAvis(pk_Avis);
+    }
 
 }

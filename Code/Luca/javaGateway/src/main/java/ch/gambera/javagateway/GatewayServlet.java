@@ -106,6 +106,7 @@ public class GatewayServlet extends HttpServlet {
         PrintWriter out = response.getWriter();
         String username = request.getParameter("username");
         String password = request.getParameter("password");
+        String pk = request.getParameter("pk");
         String result = "{\"result\": false}";
         switch (request.getParameter("action")) {
 
@@ -127,9 +128,18 @@ public class GatewayServlet extends HttpServlet {
                 System.out.println(result);
                 break;
             case "login":
+
                 if (ctrl.login(username, password)) {
                     result = "{\"result\": true}";
                     session.setAttribute("login", username);
+                    session.setAttribute("pk", pk);
+                }
+                break;
+            case "adduser":
+                if (ctrl.addUser(username, password).equals("OK")){
+                    result = "{\"result\": true}";
+                }else{
+                    result = "{\"result\": false}";
                 }
                 break;
 
