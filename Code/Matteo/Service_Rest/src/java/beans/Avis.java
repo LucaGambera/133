@@ -50,7 +50,7 @@ public class Avis implements Serializable {
     private int idFilm;
     @JoinColumn(name = "FK_Users", referencedColumnName = "PK_Users")
     @ManyToOne(optional = false)
-    private Users fKUsers;
+    private int fKUsers;
 
     public Avis() {
     }
@@ -89,11 +89,11 @@ public class Avis implements Serializable {
         this.idFilm = idFilm;
     }
 
-    public Users getFKUsers() {
+    public int getFKUsers() {
         return fKUsers;
     }
 
-    public void setFKUsers(Users fKUsers) {
+    public void setFKUsers(int fKUsers) {
         this.fKUsers = fKUsers;
     }
 

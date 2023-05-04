@@ -12,10 +12,12 @@ $().ready(function () {
 
 
     wrk_index = new Wrk_index();
+    wrk_avis = new Wrk_avis();
     ctrl_index = new Ctrl_index();
     ctrl_index.loadFilm();
     ctrl_film = new Ctrl_film();
     ctrl_avis = new Ctrl_avis();
+
 });
 
 class Ctrl_index {
@@ -36,10 +38,5 @@ class Ctrl_index {
         });
         console.log("charger")
     }
-
-    /**charge la vue map
-     * 
-     */
-
 
 }

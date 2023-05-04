@@ -42,6 +42,7 @@ class Ctrl_film {
     }
 
 
+
     /** Mets en place la page film.html et écouteurs
      * 
      */
@@ -89,7 +90,7 @@ detail(id){
 
 wrk_index.chargerVue("avis", function (){
 
-    ctrl_avis.start(id);
+    wrk_avis.getAvis("https://gamberal01.emf-informatique.ch/javaDouanier/GatewayServlet?action=getAvis");
 });
 console.log("charger")
     }
@@ -101,6 +102,7 @@ console.log("charger")
      */
     showMovies(data) {
         this.main.innerHTML = '';
+
 
         data.forEach(movie => {
             const {
@@ -120,8 +122,6 @@ console.log("charger")
                 <span class="${this.getColor(vote_average)}">${vote_average}</span>
                 
                 </div>
-            
-        
         `
 
             this.main.appendChild(movieEl);

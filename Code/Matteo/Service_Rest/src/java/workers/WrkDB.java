@@ -4,6 +4,7 @@
  */
 package workers;
 
+import beans.Avis;
 import beans.Users;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -80,22 +81,32 @@ public class WrkDB {
         return result;
     }
 
-    public ArrayList<String> getAvis() {
-        ArrayList<String> lstAvis = null;
+    public ArrayList<Avis> getAvis() {
+        ArrayList<Avis> lstAvis = null;
         boolean result = openConnexion();
         if (result) {
             System.out.println("connection ok");
             PreparedStatement ps = null;
-            String avis = "";
-            lstAvis = new ArrayList<String>();
+
+            lstAvis = new ArrayList<Avis>();
             try {
                 ps = dbConnexion.prepareStatement("SELECT * FROM t_avis");
                 ResultSet rs = ps.executeQuery();
                 while (rs.next()) {
-                    avis = (String) rs.getString(1);
-                    avis += "," + (String) rs.getString(2);
-                    avis += "," + (String) rs.getString(3);
-                    avis += "," + (String) rs.getString(4);
+                    Avis avis = new Avis();
+                    System.out.println(rs.getString(1));
+                    
+                    int pk = Integer.parseInt(rs.getString(1));
+                    System.out.println(pk);
+                    avis.setPKAvis(pk);
+                    avis.setAvis(rs.getString(2));
+                    System.out.println("idFilm");
+                    int idFilm = Integer.parseInt(rs.getString(3));
+
+                    avis.setIdFilm(idFilm);
+                    int pkUser = Integer.parseInt(rs.getString(4));
+                    avis.setFKUsers(pkUser);
+
                     lstAvis.add(avis);
                 }
                 rs.close();
@@ -156,10 +167,14 @@ public class WrkDB {
                 ps = dbConnexion.prepareStatement("SELECT * FROM t_avis where IdFilm=" + idFilm);
                 ResultSet rs = ps.executeQuery();
                 while (rs.next()) {
-                    avis = (String) rs.getString(1);
-                    avis += "," + (String) rs.getString(2);
-                    avis += "," + (String) rs.getString(3);
-                    avis += "," + (String) rs.getString(4);
+                    avis = "pk:";
+                    avis += (String) rs.getString(1);
+                    avis += ", avis:";
+                    avis += (String) rs.getString(2);
+                    avis += ", idfilm:";
+                    avis += (String) rs.getString(3);
+                    avis += ", pkuser:";
+                    avis += (String) rs.getString(4);
                     lstAvis.add(avis);
                 }
                 rs.close();

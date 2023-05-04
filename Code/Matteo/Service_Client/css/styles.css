@@ -123,6 +123,10 @@ main {
 .movie-info span.red {
     color: red;
 }
+.avis{
+    flex-wrap: wrap;
+    display: flex;
+}
 
 .overview {
     position: absolute;

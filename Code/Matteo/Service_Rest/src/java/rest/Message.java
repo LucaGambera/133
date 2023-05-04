@@ -58,7 +58,7 @@ public class Message {
         return json;
     }
 
-    //nok
+    //ok
     @GET
     @Path("getAvis")
     @Produces(MediaType.APPLICATION_JSON)
@@ -118,7 +118,7 @@ public class Message {
         return s;
     }
 
-    //nok
+    //ok
     @POST
     @Path("CheckLogin")
     @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
