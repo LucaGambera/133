@@ -1,3 +1,8 @@
+/*
+  But : Contrôleur de la page singup.html
+  Auteur : Matteo Leonetti
+  Date :   05.05.2023 / V1.0
+*/
 const myButton = document.getElementById('signup');
 myButton.addEventListener('click', function() {
     createAccount(document.getElementById("user").value,document.getElementById("passwd").value, signUpSuccess, signUpError)

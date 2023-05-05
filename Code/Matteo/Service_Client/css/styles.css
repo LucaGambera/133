@@ -10,6 +10,95 @@
     box-sizing: border-box;
 }
 
+.labelavis {
+    display: block;
+    font-size: 1.2em;
+    margin-bottom: 10px;
+}
+
+.textareaAvis {
+    width: 100%;
+    padding: 10px;
+    font-size: 1.2em;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    margin-bottom: 50px;
+}
+
+.btn2 {
+    background-color: #FF3C3C;
+    border: none;
+    color: white;
+    padding: 15px 30px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 5px;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn2:after {
+    content: "";
+    background: #fff;
+    opacity: 0.5;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 0;
+    width: 0;
+    border-radius: 100%;
+}
+
+.btn2:hover:after {
+    animation: ripple 0.6s linear;
+    height: 300px;
+    width: 300px;
+}
+
+.btn {
+    background-color: #FF3C3C;
+    border: none;
+    color: white;
+    padding: 15px 30px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 5px;
+    position: relative;
+    overflow: hidden;
+    margin-left: 50px;
+}
+
+.btn:after {
+    content: "";
+    background: #fff;
+    opacity: 0.5;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 0;
+    width: 0;
+    border-radius: 100%;
+}
+
+.btn:hover:after {
+    animation: ripple 0.6s linear;
+    height: 300px;
+    width: 300px;
+}
+
+@keyframes ripple {
+    to {
+        opacity: 0;
+        transform: scale(2);
+    }
+}
+
 :root {
     --primary-color: white;
     --secondary-color: red;
@@ -77,6 +166,8 @@ main {
     justify-content: center;
 }
 
+
+
 .movie {
     width: 300px;
     margin: 1rem;
@@ -123,9 +214,9 @@ main {
 .movie-info span.red {
     color: red;
 }
-.avis{
-    flex-wrap: wrap;
-    display: flex;
+#avis{
+    /*flex-wrap: wrap;*/
+    display: block;
 }
 
 .overview {

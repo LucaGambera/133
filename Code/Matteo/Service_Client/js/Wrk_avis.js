@@ -1,3 +1,8 @@
+/*
+  But : Worker de la page avis.html
+  Auteur : Matteo Leonetti
+  Date :   05.05.2023 / V1.0
+*/
 class Wrk_avis {
     constructor() {
     }

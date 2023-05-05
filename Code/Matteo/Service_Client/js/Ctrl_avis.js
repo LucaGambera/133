@@ -1,3 +1,8 @@
+/*
+  But : Contrôleur de la page avis.html
+  Auteur : Matteo Leonetti
+  Date :   05.05.2023 / V1.0
+*/
 class Ctrl_avis {
     constructor() {
 
@@ -5,6 +10,8 @@ class Ctrl_avis {
     }
 
     start() {
+
+this.mySuperButton = $("#mySuperButton");
         this.main2 = $("#avis");
     }
 
@@ -20,23 +27,31 @@ class Ctrl_avis {
             console.log(idFilm)
             let fKUsers = aviss['fKUsers']
             console.log(fKUsers)
-            const avisEL = document.createElement('div');
-            avisEL.class = "avis";
+            //const avisEL = document.createElement('div');
+            //avisEL.class = "avis";
 
 
-            var avisss = document.createElement("p");
+            var avisss = document.createElement('p');
+            var br = document.createElement('br');
             avisss.innerHTML = avis
 
 
 
 
+            //avisEL.appendChild(avisss)
 
 
-            avisEL.appendChild(avisss)
+            $("#avis").append(avisss);
+            $("#avis").append("<br/>");
 
-
-
-            $("#avis").append(avisEL);
+            //insertBefore(br, avisEL);
         })
+
     }
+ajoutAvis(){
+    const myInput = document.getElementById('myInput');
+    const inputContent = myInput.value;
+    console.log('Contenu de la zone de texte :', inputContent);
+
+}
 }

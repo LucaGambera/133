@@ -1,7 +1,7 @@
 /*
   But : Contrôleur de la page film.html
-  Auteur : Simon Losey
-  Date :   08.06.2022 / V1.0
+  Auteur : Matteo Leonetti
+  Date :   05.05.2023 / V1.0
 */
 
 /* 
@@ -56,7 +56,7 @@ class Ctrl_film {
         this.next = document.getElementById('next')
         this.current = document.getElementById('current')
 
-        wrk_film.getMovies("https://gamberal01.emf-informatique.ch/javaDouanier/GatewayServlet?action=getFilms&PAGE=1");
+        wrk_film.getMovies("https://gamberal01.emf-informatique.ch/javaGateway/GatewayServlet?action=getFilms&PAGE=1");
         var form = document.getElementById('form');
         var prev = document.getElementById('prev')
         var next = document.getElementById('next')
@@ -71,7 +71,7 @@ class Ctrl_film {
             if (searchTerm) {
                 wrk_film.getMovies(searchURL + '&query=' + searchTerm)
             } else {
-                wrk_film.getMovies("https://gamberal01.emf-informatique.ch/javaDouanier/GatewayServlet?action=getFilms&PAGE=" + this.currentPage);
+                wrk_film.getMovies("https://gamberal01.emf-informatique.ch/javaGateway/GatewayServlet?action=getFilms&PAGE=1");
             }
 
         })
@@ -90,7 +90,7 @@ detail(id){
 
 wrk_index.chargerVue("avis", function (){
 
-    wrk_avis.getAvis("https://gamberal01.emf-informatique.ch/javaDouanier/GatewayServlet?action=getAvis");
+    wrk_avis.getAvis("https://gamberal01.emf-informatique.ch/javaGateway/GatewayServlet?action=getAvis&IDFILM=" +id);
 });
 console.log("charger")
     }

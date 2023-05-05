@@ -1,7 +1,7 @@
 /*
-  But : Contôleur de la page index.html    
-  Auteur : Simon Losey
-  Date :   08.06.2022 / V1.0
+  But : Contrôleur de la page index.html
+  Auteur : Matteo Leonetti
+  Date :   05.05.2023 / V1.0
 */
 
 /**executer au debut

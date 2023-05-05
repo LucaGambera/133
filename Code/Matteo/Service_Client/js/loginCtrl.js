@@ -1,3 +1,8 @@
+/*
+  But : Contrôleur de la page login.html
+  Auteur : Matteo Leonetti
+  Date :   05.05.2023 / V1.0
+*/
 const myButton = document.getElementById('login');
 myButton.addEventListener('click', function() {
     login(document.getElementById("user").value,document.getElementById("password").value, loginSuccess, loginError);
