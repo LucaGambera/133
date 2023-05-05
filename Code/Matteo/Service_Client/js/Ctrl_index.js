@@ -27,6 +27,7 @@ class Ctrl_index {
      */
     constructor() {
         this.langue = "fr";
+        this.idFilm = 0;
     }
 
     /**charge la vue film

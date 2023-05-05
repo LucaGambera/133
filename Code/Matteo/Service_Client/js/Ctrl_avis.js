@@ -11,7 +11,7 @@ class Ctrl_avis {
 
     start() {
 
-this.mySuperButton = $("#mySuperButton");
+        this.mySuperButton = $("#mySuperButton");
         this.main2 = $("#avis");
     }
 
@@ -36,8 +36,6 @@ this.mySuperButton = $("#mySuperButton");
             avisss.innerHTML = avis
 
 
-
-
             //avisEL.appendChild(avisss)
 
 
@@ -48,10 +46,20 @@ this.mySuperButton = $("#mySuperButton");
         })
 
     }
-ajoutAvis(){
-    const myInput = document.getElementById('myInput');
-    const inputContent = myInput.value;
-    console.log('Contenu de la zone de texte :', inputContent);
 
-}
+    ajoutAvis() {
+
+        const myInput = document.getElementById('avis');
+        const inputContent = myInput.value;
+        console.log('Contenu de la zone de texte :', inputContent, "id FIlm", ctrl_index.idFilm);
+        wrk_avis.addAvis(inputContent, this.ajoutSuccessCallBack, this.ajoutErroCallBack);
+    }
+    ajoutSuccessCallBack(){
+        alert("L'avis a été ajouter");
+        window.location.href = "index.html";
+
+    }
+    ajoutErroCallBack(){
+        alert("L'avis n'a pa pu être ajouter");
+    }
 }

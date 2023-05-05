@@ -63,6 +63,7 @@ class Ctrl_film {
         var film = document.getElementById('film')
 
 
+
         form.addEventListener('submit', (e) => {
             e.preventDefault();
 
@@ -90,6 +91,7 @@ detail(id){
 
 wrk_index.chargerVue("avis", function (){
 
+ctrl_index.idFilm = id;
     wrk_avis.getAvis("https://gamberal01.emf-informatique.ch/javaGateway/GatewayServlet?action=getAvis&IDFILM=" +id);
 });
 console.log("charger")

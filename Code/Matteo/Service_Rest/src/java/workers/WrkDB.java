@@ -118,23 +118,25 @@ public class WrkDB {
         return lstAvis;
     }
 
-    public ArrayList<String> getUser(int PK) {
-        ArrayList<String> lstUser = null;
+    public Users getUser(String username) {
+        Users user = null;
         boolean result = openConnexion();
         if (result) {
             System.out.println("connection ok");
             PreparedStatement ps = null;
-            String user = "";
-            lstUser = new ArrayList<String>();
+
             try {
-                ps = dbConnexion.prepareStatement("SELECT * FROM t_users where PK_Users = " + PK + ";");
+                ps = dbConnexion.prepareStatement("SELECT * FROM t_users where Username = \"" + username + "\"");
+
                 ResultSet rs = ps.executeQuery();
                 while (rs.next()) {
-                    user = (String) rs.getString(1);
-                    user += "," + (String) rs.getString(2);
-                    user += "," + (String) rs.getString(3);
+                    user = new Users();
+                    short isAdmin = Short.parseShort(rs.getString(4));
 
-                    lstUser.add(user);
+                    user.setPKUsers(Integer.BYTES);
+                    int pk = Integer.parseInt(rs.getString(1));
+                    user.setPKUsers(pk);
+
                 }
                 rs.close();
                 result = true;
@@ -147,7 +149,7 @@ public class WrkDB {
                 result = closeConnexion();
             }
         }
-        return lstUser;
+        return user;
     }
 
     public ArrayList<Avis> getUnAvis(int idFilm) {
@@ -156,7 +158,7 @@ public class WrkDB {
         if (result) {
             System.out.println("connection ok");
             PreparedStatement ps = null;
-            
+
             lstAvis = new ArrayList<Avis>();
             try {
                 ps = dbConnexion.prepareStatement("SELECT * FROM t_avis where IdFilm=" + idFilm);
@@ -242,13 +244,13 @@ public class WrkDB {
         return succes;
     }
 
-    public String checkLogin(String username, String password) {
+    public boolean checkLogin(String username, String password) {
         ArrayList<Users> lstUsers = null;
 
         boolean result = openConnexion();
         int pk_Retour = 0;
         short admin_retour = 0;
-        String resultat = "false";
+        boolean resultat = false;
         if (result) {
 
             System.out.println("connection ok");
@@ -277,9 +279,7 @@ public class WrkDB {
                 rs.close();
                 for (Users lstUser : lstUsers) {
                     if (lstUser.getPassword().equals(password)) {
-                        admin_retour = lstUser.getAdmin();
-                        pk_Retour = lstUser.getPKUsers();
-                        resultat = pk_Retour + "," + admin_retour;
+                        resultat = true;
 
                     }
                 }

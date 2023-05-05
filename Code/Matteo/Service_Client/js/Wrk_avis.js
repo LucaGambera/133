@@ -25,4 +25,20 @@ class Wrk_avis {
 
     }
 
+    addAvis(text, successCallback, errorCallBack){
+        console.log("ajoutavis");
+        $.ajax({
+            type: "POST",
+            dataType: "text",
+            data: "action=addAvis&AVIS=" + text + "&IDFILM=" + ctrl_index.idFilm,
+            url: "https://gamberal01.emf-informatique.ch/javaGateway/GatewayServlet",
+            success: successCallback,
+            error: errorCallBack,
+
+        });
+        console.log("couocu");
+
+    }
+
+
 }
