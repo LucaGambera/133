@@ -4,6 +4,7 @@
  */
 package rest;
 
+import beans.Users;
 import com.google.gson.Gson;
 import java.util.ArrayList;
 import javax.ws.rs.core.Context;
@@ -77,13 +78,13 @@ public class Message {
     @GET
     @Path("getUser")
     @Produces(MediaType.APPLICATION_JSON)
-    public String getUser(@QueryParam("PK") int pk) {
+    public String getUser(@QueryParam("username") String username) {
         Gson gson = new Gson();
-        String json;
-        try {
-            json = gson.toJson(wrkdb.getUser(pk));
-        } catch (Exception e) {
-            json = gson.toJson("error");
+        String json = "{\"result\": false}";
+        Users user = wrkdb.getUser(username);
+        if (user != null) {
+            json = gson.toJson(user);
+
         }
         return json;
     }
@@ -121,13 +122,27 @@ public class Message {
     //ok
     @POST
     @Path("CheckLogin")
+    @Produces(MediaType.TEXT_PLAIN)
     @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
     public String checkLogin(@FormParam("USERNAME") String username, @FormParam("PASSWORD") String password) {
+<<<<<<< HEAD
+
+        String result;
+        if (wrkdb.checkLogin(username, password)) {
+            result = "OK";
+
+        } else {
+            result = "KO";
+        }
+
+        return result;
+=======
         Gson builder = new Gson();
         String db = wrkdb.checkLogin(username, password);
         ArrayList<String> resultat = new ArrayList<>();
         String toJson = builder.toJson(db);
         return "{\"user\":" + toJson + "}";
+>>>>>>> 0503e7c4701e05dff553d0c73daa680022c0c648
 
     }
 
