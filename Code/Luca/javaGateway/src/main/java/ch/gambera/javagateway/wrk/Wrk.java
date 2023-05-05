@@ -5,6 +5,7 @@
 package ch.gambera.javagateway.wrk;
 
 import ch.gambera.javagateway.beans.Response;
+import ch.gambera.javagateway.beans.UserReceived;
 import ch.gambera.javagateway.help.ParameterStringBuilder;
 import com.google.gson.Gson;
 import java.io.BufferedReader;
@@ -139,15 +140,8 @@ public class Wrk {
 
     }
 
-    public int getPK(String username) {
-        String retour = sendLire("https://leonettim.emf-informatique.ch/javaService_Rest/webresources/Service1/getUser?PK=" + username);
-        ArrayList<> list = retour.split(",");
-        System.out.printf("");
-
-        int pk = Integer.parseInt(list[1]);
-
-
-
-        return pk;
+    public UserReceived getPK(String username) {
+        String retour = sendLire("https://leonettim.emf-informatique.ch/javaService_Rest/webresources/Service1/getUser?username=" + username);
+        return new Gson().fromJson(retour, UserReceived.class);
     }
 }

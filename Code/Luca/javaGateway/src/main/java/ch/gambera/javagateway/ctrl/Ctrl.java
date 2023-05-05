@@ -4,6 +4,7 @@
  */
 package ch.gambera.javagateway.ctrl;
 
+import ch.gambera.javagateway.beans.UserReceived;
 import ch.gambera.javagateway.wrk.Wrk;
 
 /**
@@ -44,7 +45,7 @@ public class Ctrl {
         return refWrk.delAvis(pk_Avis);
     }
 
-    public int getPK(String username) {
+    public UserReceived getPK(String username) {
         return refWrk.getPK(username);
     }
 }
