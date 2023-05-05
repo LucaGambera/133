@@ -123,7 +123,6 @@ public class Message {
     @Path("CheckLogin")
     @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
     public String checkLogin(@FormParam("USERNAME") String username, @FormParam("PASSWORD") String password) {
-        String retour;
         Gson builder = new Gson();
         String db = wrkdb.checkLogin(username, password);
         ArrayList<String> resultat = new ArrayList<>();
@@ -146,5 +145,6 @@ public class Message {
         }
         return retour;
     }
+    
 
 }

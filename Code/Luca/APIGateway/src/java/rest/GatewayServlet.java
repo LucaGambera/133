@@ -132,6 +132,7 @@ public class GatewayServlet extends HttpServlet {
                     session.setAttribute("login", username);
                 }
                 break;
+            case "":
 
             default:
                 break;
