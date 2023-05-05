@@ -20,13 +20,13 @@ class Ctrl_avis {
         this.main2.innerHTML = "";
         data.forEach(aviss => {
             let pkavis = aviss['pKAvis']
-            console.log(pkavis);
+
             let avis = aviss['avis']
-            console.log(avis)
+
             let idFilm = aviss['idFilm']
-            console.log(idFilm)
+
             let fKUsers = aviss['fKUsers']
-            console.log(fKUsers)
+
             //const avisEL = document.createElement('div');
             //avisEL.class = "avis";
 

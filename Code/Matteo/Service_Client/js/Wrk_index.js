@@ -3,10 +3,10 @@
   Auteur : Matteo Leonetti
   Date :   05.05.2023 / V1.0
 */
+var BASE_URL = "https://gamberal01.emf-informatique.ch/javaGateway/GatewayServlet";
 class Wrk_index {
 
     constructor() {
-        console.log("je suis la");
     }
 
     /**affiche la vue demandée
@@ -30,9 +30,14 @@ class Wrk_index {
     disconnect(successCallback, errorCallback) {
         $.ajax({
             type: "POST",
-            dataType: "text",
+            dataType: "json",
             data: "action=logout",
-            url: "https://gamberal01.emf-informatique.ch/javaGateway/GatewayServlet",
+            url: BASE_URL,
+            xhrFields: {
+                withCredentials: true,
+            },
+            async: false,
+            crossDomain: true,
             success: successCallback,
         });
     }
@@ -40,11 +45,32 @@ class Wrk_index {
     login(username, password, sucesscallback, erroCallback) {
         $.ajax({
             type: "POST",
-            dataType: "text",
+            dataType: "json",
             data: "action=login&username=" + username + "&password=" + password,
-            url: "https://gamberal01.emf-informatique.ch/javaGateway/GatewayServlet",
-            success: successCallback,
-            error: errorCallBack,
+            url: BASE_URL,
+            xhrFields: {
+                withCredentials: true,
+            },
+            async: false,
+            crossDomain: true,
+            success: sucesscallback,
+            error: erroCallback,
+
+        });
+    }
+    sinscrire(username, password, sucesscallback, erroCallback){
+        $.ajax({
+            type: "POST",
+            dataType: "json",
+            data: "action=adduser&username=" + username + "&password=" + password,
+            url: BASE_URL,
+            xhrFields: {
+                withCredentials: true,
+            },
+            async: false,
+            crossDomain: true,
+            success: sucesscallback,
+            error: erroCallback,
 
         });
     }

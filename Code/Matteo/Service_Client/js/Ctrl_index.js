@@ -13,14 +13,16 @@ $().ready(function () {
 
     wrk_index = new Wrk_index();
     wrk_avis = new Wrk_avis();
-    ctrl_index = new Ctrl_index();
+    window.ctrl_index = new Ctrl_index();
     ctrl_index.loadFilm();
     ctrl_film = new Ctrl_film();
     ctrl_avis = new Ctrl_avis();
 
+
 });
 
 class Ctrl_index {
+
 
     /**constructeur de cette classe
      * 
@@ -50,14 +52,41 @@ class Ctrl_index {
         }
     }
     login(){
-        wrk_index.login(username, password,this.successCallback, this.erroCallback);
+        const username = document.getElementById('username');
+        const inputusername = username.value;
+        const password = document.getElementById('password');
+        const inputpassword = password.value;
+        wrk_index.login(inputusername, inputpassword,this.successCallback, this.erroCallback);
+
+
     }
-    successCallback(){
-        alert("Login réussi");
+    sinscrire(){
+        const username = document.getElementById('usernameInscription');
+        const inputUser = username.value;
+        const password = document.getElementById('passwordInscription');
+        const inputPassword = password.value;
+        wrk_index.sinscrire(inputUser, inputPassword, this.successCallbacksinscrire, this.erroCallbacksinscrire)
+    }
+    successCallback(data){
+        if(data.result == true){
+            alert("Login réussi");
+            ctrl_index.loadFilm();
+        }
     }
     erroCallback(){
         alert("problème login");
     }
 
 
+    successCallbacksinscrire(data){
+        if(data.result == true){
+            alert("Inscription réussi");
+            ctrl_index.loadFilm();
+        }else {
+            alert("problème inscription");
+        }
+    }
+    erroCallbacksinscrire(){
+        alert("problème inscription");
+    }
 }

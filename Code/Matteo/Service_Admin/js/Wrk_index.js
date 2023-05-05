@@ -28,7 +28,7 @@ class Wrk_index {
   disconnect(successCallback){
     $.ajax({
       type: "POST",
-      dataType: "text",
+      dataType: "json",
       data: "action=logout",
       url: "https://gamberal01.emf-informatique.ch/javaGateway/GatewayServlet",
       success: successCallback,
