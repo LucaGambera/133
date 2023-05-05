@@ -4,15 +4,15 @@
   Date :   05.05.2023 / V1.0
 */
 const myButton = document.getElementById('login');
+const myButtonInscription = document.getElementById('')
 myButton.addEventListener('click', function() {
     login(document.getElementById("user").value,document.getElementById("password").value, loginSuccess, loginError);
 
 });
 
+
 function loginError(request, status, error) {
     alert("Erreur lors du login");
-
-
     
 }
 

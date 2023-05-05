@@ -8,7 +8,7 @@ class Wrk_avis {
     }
 
     getAvis(url) {
-        console.log("lifdskjnoifds");
+
         fetch(url)
             .then(res => res.json())
             .then(data => {
@@ -29,9 +29,9 @@ class Wrk_avis {
         console.log("ajoutavis");
         $.ajax({
             type: "POST",
-            dataType: "text",
+            dataType: "json",
             data: "action=addAvis&AVIS=" + text + "&IDFILM=" + ctrl_index.idFilm,
-            url: "https://gamberal01.emf-informatique.ch/javaGateway/GatewayServlet",
+            url: BASE_URL,
             success: successCallback,
             error: errorCallBack,
 
