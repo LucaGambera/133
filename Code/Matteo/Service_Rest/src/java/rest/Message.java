@@ -125,7 +125,6 @@ public class Message {
     @Produces(MediaType.TEXT_PLAIN)
     @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
     public String checkLogin(@FormParam("USERNAME") String username, @FormParam("PASSWORD") String password) {
-<<<<<<< HEAD
 
         String result;
         if (wrkdb.checkLogin(username, password)) {
@@ -136,13 +135,6 @@ public class Message {
         }
 
         return result;
-=======
-        Gson builder = new Gson();
-        String db = wrkdb.checkLogin(username, password);
-        ArrayList<String> resultat = new ArrayList<>();
-        String toJson = builder.toJson(db);
-        return "{\"user\":" + toJson + "}";
->>>>>>> 0503e7c4701e05dff553d0c73daa680022c0c648
 
     }
 
@@ -160,6 +152,5 @@ public class Message {
         }
         return retour;
     }
-    
 
 }

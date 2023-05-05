@@ -49,5 +49,15 @@ class Ctrl_index {
             alert("Erreur lors de la déconnexion");
         }
     }
+    login(){
+        wrk_index.login(username, password,this.successCallback, this.erroCallback);
+    }
+    successCallback(){
+        alert("Login réussi");
+    }
+    erroCallback(){
+        alert("problème login");
+    }
+
 
 }
