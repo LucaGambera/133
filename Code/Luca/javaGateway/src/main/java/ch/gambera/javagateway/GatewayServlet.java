@@ -102,11 +102,8 @@ public class GatewayServlet extends HttpServlet {
                 String avis = request.getParameter("AVIS");
                 System.out.println(avis);
                 int idFilm = 0;
-
                 idFilm = Integer.parseInt(request.getParameter("IDFILM"));
                 System.out.println(idFilm);
-
-
                 pk = 1;
                 System.out.println(pk);
                 result = ctrl.addAvis(avis, idFilm, pk);
@@ -120,6 +117,7 @@ public class GatewayServlet extends HttpServlet {
                     pk = user.getpKUsers();
                     session.setAttribute("pk", pk);
                     session.setAttribute("admin", user.getAdmin() == 1);
+                    response.setHeader("Set-Cookie", "JSESSIONID="+session.getId()+"; HttpOnly; SameSite=none; secure");
                     result = "{\"result\": true}";
 
                 }
