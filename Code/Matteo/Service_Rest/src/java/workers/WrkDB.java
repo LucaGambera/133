@@ -129,19 +129,12 @@ public class WrkDB {
         if (result) {
             System.out.println("connection ok");
             PreparedStatement ps = null;
-            String users = "";
+            String user = "";
             lstUser = new ArrayList<String>();
             try {
                 ps = dbConnexion.prepareStatement("SELECT * FROM t_users where PK_Users = " + PK + ";");
                 ResultSet rs = ps.executeQuery();
                 while (rs.next()) {
-                    Users user = new Users();
-                    user.setAdmin(0);
-                    user.setPKUsers(PK);
-                    user.setUsername(users);
-                    user.setPassword(port);
-                    
-                    
                     user = (String) rs.getString(1);
                     user += "," + (String) rs.getString(2);
                     user += "," + (String) rs.getString(3);
