@@ -106,8 +106,11 @@ public class GatewayServlet extends HttpServlet {
                 System.out.println(idFilm);
                 pk = 1;
                 System.out.println(pk);
-                result = ctrl.addAvis(avis, idFilm, pk);
-                System.out.println(result);
+                String resulta = ctrl.addAvis(avis, idFilm, pk);
+                System.out.println(resulta);
+                if(resulta.equals("OK")){
+                    result = "{\"result\": OK}";
+                }
                 break;
             case "login":
 
