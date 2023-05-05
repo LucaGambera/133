@@ -39,5 +39,15 @@ class Ctrl_index {
         });
         console.log("charger")
     }
+    disconnect(){
+        wrk_index.disconnect(this.successDisconnect);
+    }
+    successDisconnect(data){
+        if(data.result == true){
+            alert("Déconnexion réussie");
+        }else{
+            alert("Erreur lors de la déconnexion");
+        }
+    }
 
 }
