@@ -44,4 +44,7 @@ public class Ctrl {
         return refWrk.delAvis(pk_Avis);
     }
 
+    public int getPK(String username) {
+        return refWrk.getPK(username);
+    }
 }

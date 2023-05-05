@@ -67,7 +67,7 @@ public class GatewayServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("application/json;c harset=UTF-8");
+        response.setContentType("application/json; charset=UTF-8");
         response.setHeader("Access-Control-Allow-Origin", "*");
         String action = request.getParameter("action");
         PrintWriter out = response.getWriter();
@@ -99,14 +99,19 @@ public class GatewayServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        
+
+        response.setHeader("Access-Control-Allow-Origin", "*");
         HttpSession session = request.getSession();
         response.setContentType("application/json");
         PrintWriter out = response.getWriter();
         String username = request.getParameter("username");
         String password = request.getParameter("password");
-        String pk = request.getParameter("pk");
+        int pk = 0;
+if (request.getParameter("pk") != null){
+     pk = Integer.parseInt(request.getParameter("pk"));
+}
+
+
         String result = "{\"result\": false}";
         switch (request.getParameter("action")) {
 
@@ -121,19 +126,25 @@ public class GatewayServlet extends HttpServlet {
 
                 idFilm = Integer.parseInt(request.getParameter("IDFILM"));
                 System.out.println(idFilm);
-                int pkUser = 0;
-                pkUser = Integer.parseInt(request.getParameter("PKUSER"));
-                System.out.println(pkUser);
-                result = ctrl.addAvis(avis, idFilm, pkUser);
+
+
+                pk = 1;
+                System.out.println(pk);
+                result = ctrl.addAvis(avis, idFilm, pk);
                 System.out.println(result);
                 break;
             case "login":
 
                 if (ctrl.login(username, password)) {
-                    result = "{\"result\": true}";
+
                     session.setAttribute("login", username);
+                    pk = ctrl.getPK(username);
+
                     session.setAttribute("pk", pk);
+                    result = "{\"result\": true}" + pk;
+
                 }
+
                 break;
             case "adduser":
                 if (ctrl.addUser(username, password).equals("OK")){
@@ -148,6 +159,8 @@ public class GatewayServlet extends HttpServlet {
         }
         out.println(result);
     }
+
+
 
     /**
      * Returns a short description of the servlet.

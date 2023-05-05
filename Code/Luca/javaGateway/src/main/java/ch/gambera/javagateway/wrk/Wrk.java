@@ -12,7 +12,10 @@ import java.io.DataOutputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 
 import static jdk.nashorn.internal.runtime.ScriptRuntime.DELETE;
 
@@ -111,7 +114,18 @@ public class Wrk {
     }
 
     public boolean login(String username, String password) {
-        return false;
+        boolean retour = false;
+        String result = sendChangement("https://leonettim.emf-informatique.ch/javaService_Rest/webresources/Service1/CheckLogin", "POST", new HashMap<String, String>(){
+            {
+           put("USERNAME", username);
+           put("PASSWORD", password);
+            }
+        });
+       if (result.equals("OK\n")){
+           retour = true;
+
+        }
+        return retour;
     }
     public String delAvis(int pk_Avis){
         String pkAvisString = "" + pk_Avis;
@@ -125,4 +139,15 @@ public class Wrk {
 
     }
 
+    public int getPK(String username) {
+        String retour = sendLire("https://leonettim.emf-informatique.ch/javaService_Rest/webresources/Service1/getUser?PK=" + username);
+        ArrayList<> list = retour.split(",");
+        System.out.printf("");
+
+        int pk = Integer.parseInt(list[1]);
+
+
+
+        return pk;
+    }
 }
