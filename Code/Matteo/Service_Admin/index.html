@@ -29,11 +29,12 @@
     <script src="https://code.jquery.com/jquery-3.5.1.min.js" charset="utf-8"></script>
 
     <script type="text/javascript" src="js/Ctrl_index.js" charset="utf-8"></script>
-    <script type="text/javascript" src="js/Ctrl_film.js" charset="utf-8"></script>
+
     <script type="text/javascript" src="js/Wrk_index.js" charset="utf-8"></script>
-    <script type="text/javascript" src="js/Wrk_avis.js" charset="utf-8"></script>
     <script type="text/javascript" src="js/Ctrl_avis.js" charset="utf-8"></script>
-    <script type="text/javascript" src="js/Wrk_film.js" charset="utf-8"></script>
+    <script type="text/javascript" src="js/Wrk_avis.js" charset="utf-8"></script>
+
+
     <link rel="stylesheet" href="css/styles.css" charset="x-UTF-16LE-BOM">
 </head>
 
@@ -48,43 +49,21 @@
         </div>
         <!--logo-->
         <!--navbar-->
-        <ul class="navbar-nav">
-            <li class="nav-item">
-                <a class="nav-link" id="film">Films</a>
-            </li>
-        </ul>
-        <ul class="navbar-nav">
-            <li class="nav-item">
-                <a class="nav-link" id="connexion" href="views/login.html">Connexion</a>
-            </li>
-        </ul>
-        <ul class="navbar-nav">
-            <li class="nav-item">
-                <a class="nav-link" id="déconnexion" onclick="ctrl_index.disconnect()">Déonnexion</a>
-            </li>
-        </ul>
-        <ul class="navbar-nav">
-            <li class="nav-item">
-                <a class="nav-link" id="avis" href="views/avis.html">Avis</a>
-            </li>
-        </ul>
+
+
         <ul class="navbar-nav me-auto mb-2 mb-lg-3">
             <li class="nav-item">
                 <a class="nav-link">Vous êtes un admin !</a>
             </li>
         </ul>
 
-        <!--barre de recherche-->
 
-            <input autocomplete="off" type="text" placeholder="Search" id="search" class="search">
-
-        <!--barre de recherche-->
         <!--navbar-->
     </header>
     <!--Haut de la page-->
     <!--contenu-->
     <div id="container">
-        <div  id="view"></div>
+        <div  id="view"> </div>
     </div>
     <!--contenu-->
 </body>

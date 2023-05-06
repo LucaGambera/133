@@ -25,15 +25,24 @@ class Wrk_index {
 
     });
   }
-  disconnect(successCallback){
-    $.ajax({
-      type: "POST",
-      dataType: "json",
-      data: "action=logout",
-      url: "https://gamberal01.emf-informatique.ch/javaGateway/GatewayServlet",
-      success: successCallback,
-    });
+  getAvis(url) {
+
+    fetch(url)
+        .then(res => res.json())
+        .then(data => {
+          console.log(data)
+          if (data.length !== 0) {
+            ctrl_avis.showAvis(data);
+
+
+          } else {
+            ctrl_avis.innerHTML = `<h1 class="no-results">No Results Found</h1>`
+          }
+
+        })
+
   }
+
 
 
 }

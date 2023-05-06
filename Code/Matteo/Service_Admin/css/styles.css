@@ -214,7 +214,7 @@ main {
 .movie-info span.red {
     color: red;
 }
-#avis{
+#avisView{
     /*flex-wrap: wrap;*/
     display: block;
 }

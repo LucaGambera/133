@@ -1,53 +1,20 @@
-/*
-  But : Contrôleur de la page index.html
-  Auteur : Matteo Leonetti
-  Date :   05.05.2023 / V1.0
-*/
-
-/**executer au debut
- * 
- */
 $().ready(function () {
-    wrk_film =new Wrk_film();
-
-
     wrk_index = new Wrk_index();
     wrk_avis = new Wrk_avis();
-    ctrl_index = new Ctrl_index();
-    ctrl_index.loadFilm();
-    ctrl_film = new Ctrl_film();
+    window.ctrl_index = new Ctrl_index();
     ctrl_avis = new Ctrl_avis();
+    ctrl_index.loadAvis();
 
 });
 
 class Ctrl_index {
-
-    /**constructeur de cette classe
-     * 
-     */
     constructor() {
-        this.langue = "fr";
-        this.idFilm = 0;
-    }
 
-    /**charge la vue film
-     * 
-     */
-    loadFilm() {
-        wrk_index.chargerVue("film", function () {
-            ctrl_film.start();
+    }
+    loadAvis() {
+        wrk_index.chargerVue("avis", function () {
+            ctrl_avis.start();
         });
         console.log("charger")
     }
-    disconnect(){
-        wrk_index.disconnect(this.successDisconnect);
-    }
-    successDisconnect(data){
-        if(data.result == true){
-            alert("Déconnexion réussie");
-        }else{
-            alert("Erreur lors de la déconnexion");
-        }
-    }
-
 }
