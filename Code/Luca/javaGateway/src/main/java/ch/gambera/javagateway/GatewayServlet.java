@@ -104,7 +104,7 @@ public class GatewayServlet extends HttpServlet {
                 int idFilm = 0;
                 idFilm = Integer.parseInt(request.getParameter("IDFILM"));
                 System.out.println(idFilm);
-                pk = 1;
+                pk = session.getAttribute("pk")
                 System.out.println(pk);
                 String resulta = ctrl.addAvis(avis, idFilm, pk);
                 System.out.println(resulta);
