@@ -4,7 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0a247450-c05e-4b44-8b41-3496566da560" name="Changes" comment="" />
+    <list default="true" id="0a247450-c05e-4b44-8b41-3496566da560" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Matteo/Service_Client/js/Ctrl_index.js" beforeDir="false" afterPath="$PROJECT_DIR$/Matteo/Service_Client/js/Ctrl_index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Matteo/Service_Client/js/loginCtrl.js" beforeDir="false" afterPath="$PROJECT_DIR$/Matteo/Service_Client/js/loginCtrl.js" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -44,7 +48,8 @@
       <updated>1683360990393</updated>
       <workItem from="1683360991428" duration="926000" />
       <workItem from="1686906656911" duration="33000" />
-      <workItem from="1686906738781" duration="527000" />
+      <workItem from="1686906738781" duration="1862000" />
+      <workItem from="1687431145947" duration="401000" />
     </task>
     <servers />
   </component>

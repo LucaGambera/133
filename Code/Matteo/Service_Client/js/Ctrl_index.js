@@ -71,6 +71,8 @@ class Ctrl_index {
         if(data.result == true){
             alert("Login réussi");
             ctrl_index.loadFilm();
+        }else{
+            alert("problème login");
         }
     }
     erroCallback(){
